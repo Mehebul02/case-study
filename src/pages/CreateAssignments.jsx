@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 import useAuth from "../hooks/useAuth";
 const CreateAssignments = () => {
   const [startDate, setStartDate] = useState(new Date());
-  const {user}=useAuth()
+  const { user } = useAuth();
   const handleAssignmentSubmit = async (e) => {
     e.preventDefault();
     const form = e.target;
@@ -15,8 +15,9 @@ const CreateAssignments = () => {
     const mark = form.mark.value;
     const difficulty = form.difficulty.value;
     const deadline = startDate;
-    const name = user?.displayName
-    const email=user?.email
+    const description = form.description.value
+    const name = user?.displayName;
+    const email = user?.email;
 
     const assignmentData = {
       title,
@@ -24,8 +25,9 @@ const CreateAssignments = () => {
       mark,
       difficulty,
       deadline,
+      description,
       name,
-      email
+      email,
     };
     console.log(assignmentData);
 
@@ -36,9 +38,7 @@ const CreateAssignments = () => {
       );
       console.log(data);
 
-    
-       toast.success("Create Assignment Successfully");
-    
+      toast.success("Create Assignment Successfully");
     } catch (err) {
       console.log(err);
     }
@@ -88,15 +88,16 @@ const CreateAssignments = () => {
               Difficulty Level:
             </label>
             <select
-              value=""
+              
               name="difficulty"
-              className="border rounded w-full p-2 input-bordered"
-            >
+              id="difficulty"
+              className="border rounded w-full p-2 input-bordered" >
               <option value="easy">Easy</option>
               <option value="medium">Medium</option>
               <option value="hard">Hard</option>
             </select>
-          </div>
+         </div> 
+          
           <div className="col-span-3">
             <label className="block mb-1 text-xl font-serif font-semibold">
               Due Date:

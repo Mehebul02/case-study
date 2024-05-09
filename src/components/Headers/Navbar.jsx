@@ -36,7 +36,7 @@ const Navbar = () => {
         <li className="text-xl font-medium font-serif">Home</li>{" "}
       </NavLink>
       <NavLink
-        to="/allArt"
+        to="/assignments"
         className={({ isActive, isPending }) =>
           isPending
             ? "pending"

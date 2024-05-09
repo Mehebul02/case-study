@@ -6,6 +6,7 @@ import Register from "../pages/Register";
 import PrivateRoutes from "../PrivateRoute/PrivateRoutes";
 import CreateAssignments from "../pages/CreateAssignments";
 import PendingAssignments from "../pages/PendingAssignments";
+import Assignment from "../pages/Assignment";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,11 @@ const router = createBrowserRouter([
       {
         path:'/pending',
         element:<PrivateRoutes><PendingAssignments/></PrivateRoutes>
+      },
+      {
+        path:'/assignments',
+        element:<Assignment/>,
+        // loader:({params})=>fetch(`${import.meta.env.VITE_API_URL}/assignments/${params.id}`)
       },
 
       {
