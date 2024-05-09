@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import logo from '../../assets/images/logo (2).png'
+import useAuth from "../../hooks/useAuth";
 const Navbar = () => {
+  const {user,userSignOut}= useAuth()
   const [theme, setTheme] = useState("light");
   const handleToggle = (e) => {
     console.log(e.target.value);
@@ -45,20 +47,24 @@ const Navbar = () => {
       >
         <li className="text-xl font-medium font-serif">Assignments</li>{" "}
       </NavLink>
-      <NavLink
-        to="/addCraft"
-        className={({ isActive, isPending }) =>
-          isPending
-            ? "pending"
-            : isActive
-            ? "text-[#0076EA] border-b-4 border-[#571f8e]"
-            : "hover:text-[#0076EA]"
-        }
-      >
-        <li className="text-xl font-medium font-serif"> Create Assignments </li>{" "}
-      </NavLink>
-      <NavLink
-        to="/myCraft"
+     {
+      user && <NavLink
+      to="/create"
+      className={({ isActive, isPending }) =>
+        isPending
+          ? "pending"
+          : isActive
+          ? "text-[#0076EA] border-b-4 border-[#571f8e]"
+          : "hover:text-[#0076EA]"
+      }
+    >
+      <li className="text-xl font-medium font-serif"> Create Assignments </li>{" "}
+    </NavLink>
+     }
+      {
+        user &&
+        <NavLink
+        to="/pending"
         className={({ isActive, isPending }) =>
           isPending
             ? "pending"
@@ -69,6 +75,7 @@ const Navbar = () => {
       >
         <li className="text-xl font-medium font-serif">Pending Assignments </li>{" "}
       </NavLink>
+      }
     </>
   );
   return (
@@ -144,15 +151,17 @@ const Navbar = () => {
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
           </svg>
         </label>
-        <>
+        {
+          user ?
+          <>
           <div className="dropdown dropdown-end z-[2] ">
             <div
               tabIndex={0}
               role="button"
               className="btn btn-ghost btn-circle avatar"
             >
-              <div className="avatar w-28 rounded-full">
-              <img src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+              <div className="avatar w-56 rounded-full">
+              <img src={user?.photoURL} />
               </div>
             </div>
             <ul
@@ -160,25 +169,37 @@ const Navbar = () => {
               className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content  rounded-box w-52"
             >
               <div className="space-y-3">
-                <h1 className="text-2xl font-serif font-medium">
-                  {/* {user?.displayName} */}
-                </h1>
-                <button className="bg-[#571f8e] px-4  rounded-md text-xl text-white  font-serif font-semibold">
+                {/* <h1 className="text-2xl font-serif font-medium">
+                  {user?.displayName}
+                </h1> */}
+                 <NavLink
+        to="/allArt"
+        className={({ isActive, isPending }) =>
+          isPending
+            ? "pending"
+            : isActive
+            ? "text-[#0076EA] border-b-4 border-[#571f8e]"
+            : "hover:text-[#0076EA]"
+        }
+      >
+        <li className="text-sm font-medium font-poppins">My Attempted Assignments</li>{" "}
+      </NavLink>
+                <button onClick={userSignOut} className="bg-[#571f8e] px-4  rounded-md text-xl text-white  font-serif font-semibold">
                   Log Out
                 </button>
               </div>
             </ul>
           </div>
         </>
-        :
-        <>
+        :<>
           <Link to="/login">
             <button className="text-2xl bg-[#7b502c] text-white px-4 py-1 font-poppins mr-5 rounded-md">Login</button>
           </Link>
-          <Link to="/login">
+          <Link to="/register">
           <button className="btn text-xl font-poppins btn-outline hover:text-white btn-success">Register</button>
           </Link>
         </>
+        }
       </div>
     </div>
     

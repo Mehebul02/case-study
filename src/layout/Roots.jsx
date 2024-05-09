@@ -9,7 +9,7 @@ const Roots = () => {
             <Navbar2/>
           <div className="p-5">
           <Navbar/>
-          <Hero/>
+        
           </div>
             <Outlet/>
         </div>
