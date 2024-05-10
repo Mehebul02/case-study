@@ -1,24 +1,27 @@
 import axios from "axios";
-import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 
-const AssignmentCard = ({ assignment }) => {
+const AssignmentCard = ({ assignment,getData, }) => {
   const { user } = useAuth();
   const { _id, email, thumbnail, title, mark, difficulty } = assignment;
 
-  const handleDelete = async (id) => {
+  const handleDelete = async (_id) => {
     try {
       if (user.email !== email) {
         toast.error("You can only delete assignments created by you.");
         return;
       }
       const { data } = await axios.delete(
-        `${import.meta.env.VITE_API_URL}/assignments/${id}`
+        `${import.meta.env.VITE_API_URL}/assignments/${_id}`
       );
+
       console.log(data);
       toast.success("Assignment delete successfully");
+      // const remaining =assignments.filter(i => i._id !== _id)
+      // setAssignments(remaining)
+      getData()
     } catch (err) {
       console.log(err);
     }

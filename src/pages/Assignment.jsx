@@ -1,14 +1,17 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import AssignmentCard from "./AssignmentCard";
+import useAuth from "../hooks/useAuth";
+
 // import { IoIosArrowDown } from "react-icons/io";
 
 const Assignment = () => {
  const [assignments ,setAssignments] = useState([])
+const{user}=useAuth()
 const [filter , setFilter]= useState('')
   useEffect(() => {
     getData();
-  }, [filter]);
+  }, [user]);
 
   const getData = async () => {
     const { data } = await axios(`${import.meta.env.VITE_API_URL}/assignments?filter =${filter}`);
@@ -44,7 +47,11 @@ const [filter , setFilter]= useState('')
             </select>
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       {
-        assignments.map(assignment => <AssignmentCard key={assignment._id} assignment={assignment}></AssignmentCard>)
+        assignments.map(assignment => <AssignmentCard key={assignment._id} 
+         getData={getData}
+          assignments ={assignments}
+          setAssignments={setAssignments}
+          assignment={assignment}></AssignmentCard>)
       }
       
     </div>
