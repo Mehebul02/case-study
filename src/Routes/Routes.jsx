@@ -7,6 +7,7 @@ import PrivateRoutes from "../PrivateRoute/PrivateRoutes";
 import CreateAssignments from "../pages/CreateAssignments";
 import PendingAssignments from "../pages/PendingAssignments";
 import Assignment from "../pages/Assignment";
+import UpdatePage from "../pages/UpdatePage";
 
 const router = createBrowserRouter([
   {
@@ -28,7 +29,12 @@ const router = createBrowserRouter([
       {
         path:'/assignments',
         element:<Assignment/>,
-        // loader:({params})=>fetch(`${import.meta.env.VITE_API_URL}/assignments/${params.id}`)
+       
+      },
+      {
+        path:'/update/:id',
+        element:<UpdatePage/>,
+         loader:({params})=>fetch(`${import.meta.env.VITE_API_URL}/assignments/${params.id}`)
       },
 
       {
