@@ -8,6 +8,8 @@ import CreateAssignments from "../pages/CreateAssignments";
 import PendingAssignments from "../pages/PendingAssignments";
 import Assignment from "../pages/Assignment";
 import UpdatePage from "../pages/UpdatePage";
+import ViewDetails from "../pages/ViewDetails";
+import AssignmentSubForm from "../pages/AssignmentSubForm";
 
 const router = createBrowserRouter([
   {
@@ -19,22 +21,40 @@ const router = createBrowserRouter([
         element: <Home />,
       },
       {
-        path:'/create',
-        element:<PrivateRoutes><CreateAssignments/></PrivateRoutes>
+        path: "/create",
+        element: (
+          <PrivateRoutes>
+            <CreateAssignments />
+          </PrivateRoutes>
+        ),
       },
       {
-        path:'/pending',
-        element:<PrivateRoutes><PendingAssignments/></PrivateRoutes>
+        path: "/pending",
+        element: (
+          <PrivateRoutes>
+            <PendingAssignments />
+          </PrivateRoutes>
+        ),
       },
       {
-        path:'/assignments',
-        element:<Assignment/>,
-       
+        path: "/assignments",
+        element: <Assignment />,
       },
       {
-        path:'/update/:id',
-        element:<UpdatePage/>,
-         loader:({params})=>fetch(`${import.meta.env.VITE_API_URL}/assignments/${params.id}`)
+        path: "/update/:id",
+        element: <UpdatePage />,
+        loader: ({ params }) =>
+          fetch(`${import.meta.env.VITE_API_URL}/assignments/${params.id}`),
+      },
+      {
+        path: "/details/:id",
+        element: <ViewDetails />,
+        loader: ({ params }) =>
+          fetch(`${import.meta.env.VITE_API_URL}/assignments/${params.id}`),
+      },
+      {
+        path:'/submit',
+        element:<AssignmentSubForm/>
       },
 
       {

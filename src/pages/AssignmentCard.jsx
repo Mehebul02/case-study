@@ -45,9 +45,11 @@ const AssignmentCard = ({ assignment,getData, }) => {
           </button>
         </Link>
 
-        <button className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
+       <Link to={`/details/${_id}`}>
+       <button className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">
           View
         </button>
+       </Link>
       </div>
     </div>
   );
