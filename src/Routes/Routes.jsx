@@ -48,13 +48,20 @@ const router = createBrowserRouter([
       },
       {
         path: "/details/:id",
-        element: <ViewDetails />,
+        element: (
+          <PrivateRoutes>
+            {" "}
+            <ViewDetails />
+          </PrivateRoutes>
+        ),
         loader: ({ params }) =>
           fetch(`${import.meta.env.VITE_API_URL}/assignments/${params.id}`),
       },
       {
-        path:'/submit',
-        element:<AssignmentSubForm/>
+        path: "/submit/:id",
+        element: <AssignmentSubForm />,
+        loader: ({ params }) =>
+          fetch(`${import.meta.env.VITE_API_URL}/assignments/${params.id}`),
       },
 
       {

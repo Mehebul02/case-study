@@ -57,7 +57,7 @@ const CreateAssignments = () => {
           <input
             type="text"
             name="title"
-            className="border rounded w-full p-2 input-bordered"
+            className="border rounded w-full p-2 input-bordered" required
           />
         </div>
         <div>
@@ -67,7 +67,7 @@ const CreateAssignments = () => {
           <input
             type="text"
             name="thumbnail"
-            className="border rounded w-full p-2 input-bordered"
+            className="border rounded w-full p-2 input-bordered" required
           />
         </div>
 
@@ -78,7 +78,7 @@ const CreateAssignments = () => {
           <input
             type="number"
             name="mark"
-            className="border rounded w-full p-2 input-bordered"
+            className="border rounded w-full p-2 input-bordered" required
           />
         </div>
 

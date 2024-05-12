@@ -18,7 +18,7 @@ const ViewDetails = () => {
            <p className="font-poppins font-semibold">Mark:<span className="">{mark}</span></p>
            <p className="text-gray-600 mb-2">Difficulty: {difficulty}</p>
            </div>
-           <Link to='/submit'>
+           <Link to={`/submit/${_id}`}>
            <button className="text-xl font-poppins mt-4 bg-green-500 text-white px-4 py-2 rounded hover:bg-green-60 ">Take Assignment</button>
            </Link>
           </div>
