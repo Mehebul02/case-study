@@ -26,7 +26,7 @@ const MySubmit = () => {
           </h2>
 
           <span className="px-3 py-1 bg-[#544CE0] font-poppins font-medium  text-xs  text-white rounded-full ">
-            {submits.length} Job
+            {submits.length} 
           </span>
         </div>
 
@@ -86,9 +86,18 @@ const MySubmit = () => {
 
                         <td className="px-4 py-4 text-sm text-gray-500  whitespace-nowrap">
                           {submit.status}
+                          {/* <span
+                            className={`h-1.5 w-1.5 rounded-full ${
+                              submit.status === "Pending" && "bg-yellow-500"
+                            }  ${submit.status === "Complete" && "bg-green-500"} `}
+                          ></span> */}
+                          
                         </td>
                         <td className="px-4 py-4 text-sm whitespace-nowrap">
                           {submit.mark}
+                        </td>
+                        <td className="px-4 py-4 text-sm whitespace-nowrap">
+                          {submit.feedback}
                         </td>
                       </tr>
                     ))}
