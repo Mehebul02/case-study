@@ -8,7 +8,8 @@ import useAuth from "../hooks/useAuth";
 const Assignment = () => {
  const [assignments ,setAssignments] = useState([])
 const{user}=useAuth()
-const [filter , setFilter]= useState('')
+const [filteredAssignments, setFilteredAssignments] = useState([]);
+const [filter, setFilter] = useState('');
   useEffect(() => {
     getData();
   }, [user]);
@@ -19,22 +20,22 @@ const [filter , setFilter]= useState('')
     setAssignments(data)
   };
   console.log(assignments)
+
+  useEffect(() => {
+    if (filter !== '') {
+      const filtered = assignments.filter(assignment => assignment.difficulty === filter);
+      setFilteredAssignments(filtered);
+    } else {
+      setFilteredAssignments(assignments);
+    }
+  }, [filter, assignments]);
+
   return (
     <div>
       <div className="max-w-[1300px] mx-auto text-center">
-      {/* <div className="dropdown dropdown-end ">
-  <div tabIndex={0} role="button" className="bg-green-700 px-6 m-1 flex items-center gap-3 text-white py-2 font-serif text-xl font-semibold mt-7 rounded-lg">Filter <IoIosArrowDown/></div>
-  <ul tabIndex={0} className="dropdown-content  z-[1] menu p-2 text-xl font-medium font-serif shadow bg-base-200 rounded-box w-52">
-    <li ><a>easy</a></li>
-    <li><a>medium</a></li>
-    <li><a>hard</a></li>
-  </ul>
-</div> */}
+  
 <select
-              onChange={e => {
-                setFilter(e.target.value)
-                
-              }}
+               onChange={(e) => setFilter(e.target.value)}
               value={filter}
               name='difficulty'
               id='difficulty'
@@ -47,7 +48,7 @@ const [filter , setFilter]= useState('')
             </select>
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       {
-        assignments.map(assignment => <AssignmentCard key={assignment._id} 
+        filteredAssignments.map(assignment => <AssignmentCard key={assignment._id} 
          getData={getData}
           assignments ={assignments}
           setAssignments={setAssignments}

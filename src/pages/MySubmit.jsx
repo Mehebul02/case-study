@@ -13,7 +13,8 @@ const MySubmit = () => {
 
   const getData = async () => {
     const { data } = await axios(
-      `${import.meta.env.VITE_API_URL}/my-submit/${user?.email}`);
+      `${import.meta.env.VITE_API_URL}/my-submit/${user?.email}`
+    );
     setSubmits(data);
   };
 
@@ -26,7 +27,7 @@ const MySubmit = () => {
           </h2>
 
           <span className="px-3 py-1 bg-[#544CE0] font-poppins font-medium  text-xs  text-white rounded-full ">
-            {submits.length} 
+            {submits.length}
           </span>
         </div>
 
@@ -85,13 +86,31 @@ const MySubmit = () => {
                         </td>
 
                         <td className="px-4 py-4 text-sm text-gray-500  whitespace-nowrap">
-                          {submit.status}
+                          {/* {submit.status} */}
                           {/* <span
                             className={`h-1.5 w-1.5 rounded-full ${
                               submit.status === "Pending" && "bg-yellow-500"
                             }  ${submit.status === "Complete" && "bg-green-500"} `}
                           ></span> */}
-                          
+                          <div
+                            className={`inline-flex items-center px-3 py-1 rounded-full gap-x-2 ${
+                              submit.status === "Pending" && "bg-yellow-500"
+                            } ${
+                              submit.status === " Completed" &&
+                              "bg-emerald-100/60 text-emerald-500"
+                            } `}
+                          >
+                            <span
+                              className={`h-1.5 w-1.5 rounded-full ${
+                                submit.status === "Pending" && "bg-yellow-500"
+                              }  ${
+                                submit.status === " Completed" && "bg-green-500"
+                              }   `}
+                            ></span>
+                            <h2 className="text-sm font-normal ">
+                              {submit.status}
+                            </h2>
+                          </div>
                         </td>
                         <td className="px-4 py-4 text-sm whitespace-nowrap">
                           {submit.mark}

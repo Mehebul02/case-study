@@ -11,7 +11,7 @@ const PendingAssignments = () => {
         <h2 className="text-lg font-medium text-black ">Pending Assignment</h2>
 
         <span className="px-3 py-1 text-xs bg-[#544CE0] font-poppins font-medium text-blue-100 rounded-full ">
-          {assignment.length} Job
+          {assignment.length} 
         </span>
       </div>
 
