@@ -1,31 +1,36 @@
 import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import logo from '../../assets/images/logo (2).png'
+import logo from "../../assets/images/logo (2).png";
 import useAuth from "../../hooks/useAuth";
-import {  HashLoader } from "react-spinners";
+import { HashLoader } from "react-spinners";
 const Navbar = () => {
-  const {user,userSignOut,loading}= useAuth()
-  
-  const [theme, setTheme] = useState("light");
-  const handleToggle = (e) => {
-    console.log(e.target.value);
-    if (e.target.checked ) {
-      setTheme("dracula");
-    } else {
-      setTheme("light");
-    }
-  };
-  useEffect(() => {
-    localStorage.setItem("theme", theme);
-    const localTheme = localStorage.getItem("theme");
+  const { user, userSignOut, loading } = useAuth();
 
-    // add custom data-theme attribute
-    document.querySelector("html").setAttribute("data-theme", localTheme);
-  }, [theme]);
-  if(loading){
-    return <div className="flex justify-center items-center h-screen">
-      <HashLoader height={140} radius={9} width={40} color="#36d7b7" />
-    </div>
+  const [theme, setTheme] = useState("light");
+
+  // Function to handle theme toggle
+  const handleToggle = () => {
+    const newTheme = theme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+    localStorage.setItem("theme", newTheme); // Save theme preference to localStorage
+    document.documentElement.setAttribute("data-theme", newTheme); // Apply theme to document
+  };
+
+  useEffect(() => {
+    // Load theme preference from localStorage on initial render
+    const storedTheme = localStorage.getItem("theme");
+    if (storedTheme) {
+      setTheme(storedTheme);
+      document.documentElement.setAttribute("data-theme", storedTheme); // Apply theme to document
+    }
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <HashLoader height={140} radius={9} width={40} color="#36d7b7" />
+      </div>
+    );
   }
   const navLink = (
     <>
@@ -53,35 +58,39 @@ const Navbar = () => {
       >
         <li className="text-xl font-medium font-serif">Assignments</li>{" "}
       </NavLink>
-     {
-      user && <NavLink
-      to="/create"
-      className={({ isActive, isPending }) =>
-        isPending
-          ? "pending"
-          : isActive
-          ? "text-[#0076EA] border-b-4 border-[#571f8e]"
-          : "hover:text-[#0076EA]"
-      }
-    >
-      <li className="text-xl font-medium font-serif"> Create Assignments </li>{" "}
-    </NavLink>
-     }
-      {
-        user &&
+      {user && (
         <NavLink
-        to="/pending"
-        className={({ isActive, isPending }) =>
-          isPending
-            ? "pending"
-            : isActive
-            ? "text-[#0076EA] border-b-4 border-[#571f8e]"
-            : "hover:text-[#0076EA]"
-        }
-      >
-        <li className="text-xl font-medium font-serif">Pending Assignments </li>{" "}
-      </NavLink>
-      }
+          to="/create"
+          className={({ isActive, isPending }) =>
+            isPending
+              ? "pending"
+              : isActive
+              ? "text-[#0076EA] border-b-4 border-[#571f8e]"
+              : "hover:text-[#0076EA]"
+          }
+        >
+          <li className="text-xl font-medium font-serif">
+            {" "}
+            Create Assignments{" "}
+          </li>{" "}
+        </NavLink>
+      )}
+      {user && (
+        <NavLink
+          to="/pending"
+          className={({ isActive, isPending }) =>
+            isPending
+              ? "pending"
+              : isActive
+              ? "text-[#0076EA] border-b-4 border-[#571f8e]"
+              : "hover:text-[#0076EA]"
+          }
+        >
+          <li className="text-xl font-medium font-serif">
+            Pending Assignments{" "}
+          </li>{" "}
+        </NavLink>
+      )}
     </>
   );
 
@@ -159,58 +168,70 @@ const Navbar = () => {
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
           </svg>
         </label>
-        {
-          user ?
+        {user ? (
           <>
-          <div className="dropdown dropdown-end z-[2] ">
-            <div
-              tabIndex={0}
-              role="button"
-              className="btn btn-ghost btn-circle avatar"
-            >
-              <div className="avatar w-56 rounded-full">
-              <img src={user?.photoURL} />
+            <div className="dropdown dropdown-end z-[2] ">
+              <div
+                tabIndex={0}
+                role="button"
+                className="btn btn-ghost btn-circle avatar"
+              >
+                <div className="avatar w-56 rounded-full">
+                  <img src={user?.photoURL} />
+                </div>
               </div>
-            </div>
-            <ul
-              tabIndex={0}
-              className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content  rounded-box w-52"
-            >
-              <div className="space-y-3">
-                {/* <h1 className="text-2xl font-serif font-medium">
+              <ul
+                tabIndex={0}
+                className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content  rounded-box w-52"
+              >
+                <div className="space-y-3">
+                  {/* <h1 className="text-2xl font-serif font-medium">
                   {user?.displayName}
                 </h1> */}
-                 <NavLink
-        to="/allArt"
-        className={({ isActive, isPending }) =>
-          isPending
-            ? "pending"
-            : isActive
-            ? "text-[#0076EA] border-b-4 border-[#571f8e]"
-            : "hover:text-[#0076EA]"
-        }
-      >
-       <Link to='/my-submit'> <li className="text-sm font-medium font-poppins"> My Submitted</li>{" "}</Link>
-      </NavLink>
-                <button onClick={userSignOut} className="bg-[#571f8e] px-4  rounded-md text-xl text-white  font-serif font-semibold">
-                  Log Out
-                </button>
-              </div>
-            </ul>
-          </div>
-        </>
-        :<>
-          <Link to="/login">
-            <button className="text-2xl bg-[#7b502c] text-white px-4 py-1 font-poppins mr-5 rounded-md">Login</button>
-          </Link>
-          <Link to="/register">
-          <button className="btn text-xl font-poppins btn-outline hover:text-white btn-success">Register</button>
-          </Link>
-        </>
-        }
+                  <NavLink
+                    to="/allArt"
+                    className={({ isActive, isPending }) =>
+                      isPending
+                        ? "pending"
+                        : isActive
+                        ? "text-[#0076EA] border-b-4 border-[#571f8e]"
+                        : "hover:text-[#0076EA]"
+                    }
+                  >
+                    <Link to="/my-submit">
+                      {" "}
+                      <li className="text-sm font-medium font-poppins">
+                        {" "}
+                        My Submitted
+                      </li>{" "}
+                    </Link>
+                  </NavLink>
+                  <button
+                    onClick={userSignOut}
+                    className="bg-[#571f8e] px-4  rounded-md text-xl text-white  font-serif font-semibold"
+                  >
+                    Log Out
+                  </button>
+                </div>
+              </ul>
+            </div>
+          </>
+        ) : (
+          <>
+            <Link to="/login">
+              <button className="text-2xl bg-[#7b502c] text-white px-4 py-1 font-poppins mr-5 rounded-md">
+                Login
+              </button>
+            </Link>
+            <Link to="/register">
+              <button className="btn text-xl font-poppins btn-outline hover:text-white btn-success">
+                Register
+              </button>
+            </Link>
+          </>
+        )}
       </div>
     </div>
-    
   );
 };
 

@@ -7,7 +7,7 @@ import { Helmet } from "react-helmet-async";
 const AssignmentSubForm = () => {
   const assignment = useLoaderData();
   const {user} = useAuth()
-  const { _id,  thumbnail, title, description, mark, difficulty } =
+  const { _id,  thumbnail, title, email,description, mark, difficulty } =
     assignment;
 const status = 'Pending'
 const  feedback=''
@@ -31,7 +31,7 @@ const  feedback=''
       
     };
     try {
-      if (user.email === email) {
+      if (user.email !== email) {
         toast.error("The person creating the assignment cannot submit it.");
         return;
       }

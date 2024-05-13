@@ -36,22 +36,24 @@ const GiveMark = () => {
     <div>
       <div className="max-w-[1320px] mx-auto mt-14 space-y-6">
         <div className="flex flex-col lg:flex-row justify-center items-center gap-4">
-          <h1 className="text-2xl font-poppins font-semibold">
+          {/* <h1 className="text-2xl font-poppins font-semibold">
             Assignment Url:
-          </h1>
-          <input
+          </h1> */}
+          {/* <input
             type="text"
             placeholder=""
             defaultValue={url}
             className="input input-bordered input-primary w-full max-w-xl"
-          />
-          <a
+          /> */}
+          {/* <a
             href={url}
             target="_blank"
             className="text-blue-600 text-2xl font-poppins font-semibold  mr-10 visited:text-purple-600 ..."
           >
             <button className=" border-2 px-4 py-2 rounded-md"> visit</button>
-          </a>
+          </a> */}
+          {/* <iframe src='https://drive.google.com/file/d/1EdHP3wj3Zzux5CTeZOqWJKuWRyAB3N-F/view?usp=sharing' width="640" height="480"></iframe> */}
+          <iframe src={url} width="450" height="300" allow="autoplay"></iframe>
         </div>
         <h1 className="text-2xl font-poppins  text-center">
           Examinee Note:{" "}
