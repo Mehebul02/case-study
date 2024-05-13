@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import AssignmentCard from "./AssignmentCard";
 import useAuth from "../hooks/useAuth";
+import { Helmet } from "react-helmet-async";
 
 // import { IoIosArrowDown } from "react-icons/io";
 
@@ -32,6 +33,9 @@ const [filter, setFilter] = useState('');
 
   return (
     <div>
+      <Helmet>
+      <title> Assignment- Case Study </title>
+    </Helmet>
       <div className="max-w-[1300px] mx-auto text-center">
   
 <select
@@ -39,14 +43,14 @@ const [filter, setFilter] = useState('');
               value={filter}
               name='difficulty'
               id='difficulty'
-              className='border p-4 rounded-lg'
+              className='border-2 p-4 rounded-lg border-green-800'
             >
               <option value=''>Filter By Category</option>
               <option value='easy'>easy</option>
               <option value='medium'>medium</option>
               <option value='hard'>hard</option>
             </select>
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
       {
         filteredAssignments.map(assignment => <AssignmentCard key={assignment._id} 
          getData={getData}

@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 import { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import useAuth from "../hooks/useAuth";
+import { Helmet } from "react-helmet-async";
 // import { Typewriter } from "react-simple-typewriter";
 // import { Helmet } from "react-helmet-async";
 const Register = () => {
@@ -52,6 +53,9 @@ const Register = () => {
         <title>Artistic Vistas | Register</title>
       </Helmet> */}
       <div className=" flex flex-col md:flex lg:flex-row justify-center gap-10 space-x-10 mt-10 max-w-[1300px] mx-auto">
+      <Helmet>
+      <title> Register - Case Study </title>
+    </Helmet>
       <div className="lg:w-1/2 border p-6 rounded-lg shadow-lg">
       <h1 className="text-3xl text-red-700 font-serif font-semibold ">
        

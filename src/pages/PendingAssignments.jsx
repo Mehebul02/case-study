@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import { Link, useLoaderData } from "react-router-dom";
 
 const PendingAssignments = () => {
@@ -6,6 +7,9 @@ const PendingAssignments = () => {
 // console.log(assignment._id)
     return (
         <div className="max-w-[1320px] mx-auto">
+          <Helmet>
+      <title> Pending Assignment - Case Study </title>
+    </Helmet>
             <section className="container px-4 mx-auto pt-12">
       <div className="flex items-center gap-x-3">
         <h2 className="text-lg font-medium text-black ">Pending Assignment</h2>

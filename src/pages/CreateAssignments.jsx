@@ -4,6 +4,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
 import toast from "react-hot-toast";
 import useAuth from "../hooks/useAuth";
+import { Helmet } from "react-helmet-async";
 const CreateAssignments = () => {
   const [startDate, setStartDate] = useState(new Date());
   const { user } = useAuth();
@@ -39,12 +40,16 @@ const CreateAssignments = () => {
       console.log(data);
 
       toast.success("Create Assignment Successfully");
+      form.reset()
     } catch (err) {
       console.log(err);
     }
   };
   return (
     <div className="max-w-[850px] mx-auto ">
+      <Helmet>
+      <title> Create Assignment-Case Study </title>
+    </Helmet>
       <h2 className="text-2xl font-bold font-poppins mb-4">
         Create Assignment
       </h2>

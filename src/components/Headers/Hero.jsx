@@ -1,5 +1,8 @@
 import { BiWorld } from 'react-icons/bi';
 import banner1 from '../../assets/images/banner1.avif'
+import banner2 from '../../assets/images/Study.jpeg'
+import banner3 from '../../assets/images/banner3.jpg'
+import banner4 from '../../assets/images/banner4.jpg'
 const Hero = () => {
     return (
         <section className="dark:bg-gray-100 dark:text-gray-800">
@@ -13,7 +16,7 @@ const Hero = () => {
                    </div>
                    <h1 className='text-sm font-poppins font-medium'>122 Online Now</h1>
                </div>
-                <h1 className="text-5xl font-poppins font-semibold leading-none sm:text-5xl p-2">Working towards your <br />dreams is hard. Not <br />reaching them is harder
+                <h1 className=" text-2xl lg:text-5xl font-poppins font-semibold leading-none sm:text-5xl p-2">Working towards your <br />dreams is hard. Not <br />reaching them is harder
                    
                 </h1>
                 <p className="mt-6 mb-8 text-lg sm:mb-12 flex items-center gap-2">Get work done with other from 
@@ -24,22 +27,22 @@ const Hero = () => {
                     <a rel="noopener noreferrer" href="#" className="px-8 py-3 text-lg font-semibold border rounded dark:border-gray-800">Let's Go</a>
                 </div>
             </div>
-            <div className="grid grid-cols-2 w-1/2 gap-10">
+            <div className="grid grid-cols-2 lg:w-1/2 gap-10">
                 {/* <img src={banner1} alt="" className="object-contain w-1/2 h-72 sm:h-80 lg:h-96 xl:h-112 2xl:h-128" />
                 <img src={banner1} alt="" className="object-contain w-1/2 h-72 sm:h-80 lg:h-96 xl:h-112 2xl:h-128" />
                 <img src={banner1} alt="" className="object-contain w-1/2 h-72 sm:h-80 lg:h-96 xl:h-112 2xl:h-128" />
                 <img src={banner1} alt="" className="object-contain w-1/2 h-72 sm:h-80 lg:h-96 xl:h-112 2xl:h-128" /> */}
            <div>
-           <img src={banner1} className='rounded-md'  alt="" />
+           <img src={banner1} className='rounded-xl '  alt="" />
            </div>
            <div>
-           <img src={banner1}  alt="" />
+           <img src={banner2} className='rounded-xl' alt="" />
            </div>
            <div>
-           <img src={banner1}  alt="" />
+           <img src={banner3} className='rounded-xl' alt="" />
            </div>
            <div>
-           <img src={banner1}  alt="" />
+           <img src={banner4} className='rounded-xl' alt="" />
            </div>
            
             </div>

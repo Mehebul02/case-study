@@ -8,12 +8,14 @@ import toast, { Toaster } from "react-hot-toast";
 import Swal from "sweetalert2";
 import login_Photo from '../assets/images/signin-image.jpg'
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import axios from "axios";
+import { Helmet } from "react-helmet-async";
 const Login = () => {
     const { userSignIn, signInGoogle, githubLogin ,loading} = useAuth();
     const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
     const location = useLocation();
-    const from = location?.state || "/";
+    const from = location.state || "/";
     const handleSignIn = (e) => {
         e.preventDefault();
         const form = e.target;
@@ -47,14 +49,28 @@ const Login = () => {
           });
       };
       // google login
-      const googleLogin = () => {
-        signInGoogle()
+      const googleLogin = async() => {
+        
+        try{
+          const result =signInGoogle()
           .then((result) => {
             navigate(from);
           })
           .catch((error) => {
             console.log(error);
           });
+          const {data} = await axios.post(`${import.meta.env.VITE_API_URL}/jwt`,{email: result?.user?.email
+          },{withCredentials:true})
+          // toast.success("Signin Successful");
+      
+      // navigate(from);
+      
+        }
+        catch(err){
+          console.log(err);
+          toast.error(err.message);
+        }
+       
       };
       const handleGithub = () => {
         githubLogin()
@@ -68,7 +84,9 @@ const Login = () => {
     
     return (
         <div className=" flex flex-col md:flex lg:flex-row p-2 lg:space-x-10 mt-10  max-w-[1300px] mx-auto">
-      
+      <Helmet>
+      <title> Login - Case Study </title>
+    </Helmet>
         <div
           className="w-full min-h-screen  bg-gray-400  hidden lg:block  bg-no-repeat  lg:w-1/2  rounded-l-lg "
           style={{

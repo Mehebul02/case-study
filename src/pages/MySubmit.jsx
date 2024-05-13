@@ -3,6 +3,7 @@ import useAuth from "../hooks/useAuth";
 
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { Helmet } from "react-helmet-async";
 
 const MySubmit = () => {
   const { user } = useAuth();
@@ -13,13 +14,16 @@ const MySubmit = () => {
 
   const getData = async () => {
     const { data } = await axios(
-      `${import.meta.env.VITE_API_URL}/my-submit/${user?.email}`
+      `${import.meta.env.VITE_API_URL}/my-submit/${user?.email}`,{withCredentials:true}
     );
     setSubmits(data);
   };
 
   return (
     <div className="max-w-[1320px] mx-auto">
+      <Helmet>
+      <title> My Submitted- Case Study </title>
+    </Helmet>
       <section className="container px-4 mx-auto pt-12">
         <div className="flex items-center gap-x-3">
           <h2 className="text-lg font-medium text-gray-800 ">
@@ -116,7 +120,7 @@ const MySubmit = () => {
                           {submit.mark}
                         </td>
                         <td className="px-4 py-4 text-sm whitespace-nowrap">
-                          {submit.feedback}
+                          {submit.feedback.slice(0,60)}
                         </td>
                       </tr>
                     ))}

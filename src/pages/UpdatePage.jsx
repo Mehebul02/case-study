@@ -5,6 +5,7 @@ import useAuth from "../hooks/useAuth";
 import axios from "axios";
 import toast from "react-hot-toast";
 import { useLoaderData, useLocation, useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 const UpdatePage = () => {
   const assignment = useLoaderData();
   // console.log(assignment)
@@ -53,6 +54,9 @@ const UpdatePage = () => {
   };
   return (
     <div className="max-w-[850px] mx-auto ">
+      <Helmet>
+      <title> Update - Case Study </title>
+    </Helmet>
       <h2 className="text-2xl font-bold font-poppins mb-4">
         Update Assignment
       </h2>

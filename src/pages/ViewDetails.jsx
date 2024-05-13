@@ -1,3 +1,4 @@
+import { Helmet } from "react-helmet-async";
 import { Link, useLoaderData } from "react-router-dom";
 
 const ViewDetails = () => {
@@ -7,6 +8,9 @@ const ViewDetails = () => {
   return (
     <div>
       <div className="hero min-h-screen ">
+      <Helmet>
+      <title> Details- Case Study </title>
+    </Helmet>
         <div className="hero-content flex-col  lg:flex-row">
           <img src={thumbnail} className="max-w-sm rounded-lg shadow-2xl" />
           <div>

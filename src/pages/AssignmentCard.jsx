@@ -27,7 +27,7 @@ const AssignmentCard = ({ assignment,getData, }) => {
     }
   };
   return (
-    <div className="bg-white rounded-lg shadow-md p-4">
+    <div className="bg-white border rounded-lg shadow-md p-4">
       <img src={thumbnail} className="" />
       <h3 className="text-lg font-poppins font-semibold">{title}</h3>
       <p className="text-gray-600 mb-2">Marks: {mark}</p>

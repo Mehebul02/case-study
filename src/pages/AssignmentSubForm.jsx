@@ -2,6 +2,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import { useLoaderData } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
+import { Helmet } from "react-helmet-async";
 
 const AssignmentSubForm = () => {
   const assignment = useLoaderData();
@@ -30,9 +31,14 @@ const  feedback=''
       
     };
     try {
+      if (user.email === email) {
+        toast.error("The person creating the assignment cannot submit it.");
+        return;
+      }
+
       const { data } = await axios.post(
         `${import.meta.env.VITE_API_URL}/submits`,
-        submitData
+        submitData,{withCredentials:true}
       );
       toast.success('Assignment submit successfully')
     } catch (err) {
@@ -41,6 +47,9 @@ const  feedback=''
   };
   return (
     <div className="max-w-[1020px] mx-auto bg-base-200 p-10 rounded-xl shadow-lg">
+      <Helmet>
+      <title> Submit- Case Study </title>
+    </Helmet>
       <h1 className="text-3xl font-poppins text-center font-semibold text-red-700">
         Assignment Submission Form
       </h1>

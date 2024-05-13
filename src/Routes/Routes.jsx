@@ -53,7 +53,6 @@ const router = createBrowserRouter([
         path: "/details/:id",
         element: (
           <PrivateRoutes>
-            {" "}
             <ViewDetails />
           </PrivateRoutes>
         ),
@@ -75,9 +74,10 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path:'/give-mark/:id',
-        element:<GiveMark/>,
-        loader: ({params}) => fetch(`${import.meta.env.VITE_API_URL}/submits/${params.id}`)
+        path: "/give-mark/:id",
+        element: <GiveMark />,
+        loader: ({ params }) =>
+          fetch(`${import.meta.env.VITE_API_URL}/submits/${params.id}`,{credentials:"include"}),
       },
 
       {

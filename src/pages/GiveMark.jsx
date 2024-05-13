@@ -1,10 +1,12 @@
 import axios from "axios";
 import toast from "react-hot-toast";
 import { Link, useLoaderData } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
 
 const GiveMark = () => {
   const assignment = useLoaderData();
-  const { _id, title, url, note, mark, difficulty } = assignment;
+  const {user} = useAuth()
+  const { _id, title,email, url, note, mark, difficulty } = assignment;
   const status =' Completed'
   const handleGiveMark =async (e) => {
     e.preventDefault();
@@ -16,6 +18,10 @@ const GiveMark = () => {
       feedback,status
     }
     try{
+      if (user.email === email) {
+        toast.error("Only examiner can submit assignment number.");
+        return;
+      }
       const {data} = await axios.put(`${import.meta.env.VITE_API_URL}/update/${_id}`,giveMark)
       console.log(data)
       toast.success('Give mark successfully')
@@ -56,7 +62,7 @@ const GiveMark = () => {
             <input
               type="text"
               placeholder="Enter the marks"
-              name="mark"
+              name="mark" required
               className="input input-bordered input-primary w-full max-w-xl"
             />
             <br />
@@ -64,7 +70,7 @@ const GiveMark = () => {
               <textarea
                 name="feedback"
                 placeholder=" Feedback........"
-                rows="4"
+                rows="4" required
                 className="textarea textarea-bordered  textarea-lg w-full max-w-xl"
               ></textarea>
             </div>
