@@ -1,12 +1,13 @@
 import { useState } from "react";
-import { FaEye, FaEyeSlash, FaGithub } from "react-icons/fa";
-import { FcGoogle } from "react-icons/fc";
+
+
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import { HashLoader } from "react-spinners";
 import toast, { Toaster } from "react-hot-toast";
 import Swal from "sweetalert2";
 import login_Photo from '../assets/images/signin-image.jpg'
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 const Login = () => {
     const { userSignIn, signInGoogle, githubLogin ,loading} = useAuth();
     const [showPassword, setShowPassword] = useState(false);

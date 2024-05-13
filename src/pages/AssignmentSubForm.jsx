@@ -1,30 +1,38 @@
 import axios from "axios";
+import toast from "react-hot-toast";
 import { useLoaderData } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
 
 const AssignmentSubForm = () => {
   const assignment = useLoaderData();
-  const { _id, email, thumbnail, title, description, mark, difficulty } =
+  const {user} = useAuth()
+  const { _id,  thumbnail, title, description, mark, difficulty } =
     assignment;
-
+const status = 'Pending'
   const handleSubmit = async (e) => {
     e.preventDefault();
     const form = e.target;
     const url = form.url.value;
     const note = form.note.value;
+    const email = user?.email
+    const name = user?.displayName
     const submitData = {
       title,
       mark,
       difficulty,
       url,
       note,
+      status,
+      name,
       email,
+      
     };
     try {
       const { data } = await axios.post(
         `${import.meta.env.VITE_API_URL}/submits`,
         submitData
       );
-      console.log(data);
+      toast.success('Assignment submit successfully')
     } catch (err) {
       console.log(err);
     }
@@ -34,7 +42,7 @@ const AssignmentSubForm = () => {
       <h1 className="text-3xl font-poppins text-center font-semibold text-red-700">
         Assignment Submission Form
       </h1>
-
+{/* <h1>{_id}</h1> */}
       <form onSubmit={handleSubmit}>
         <div className="text-center mt-14 space-y-4">
           <input

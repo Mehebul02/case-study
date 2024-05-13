@@ -2,12 +2,14 @@ import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import logo from '../../assets/images/logo (2).png'
 import useAuth from "../../hooks/useAuth";
+import {  HashLoader } from "react-spinners";
 const Navbar = () => {
-  const {user,userSignOut}= useAuth()
+  const {user,userSignOut,loading}= useAuth()
+  
   const [theme, setTheme] = useState("light");
   const handleToggle = (e) => {
     console.log(e.target.value);
-    if (e.target.checked) {
+    if (e.target.checked ) {
       setTheme("dracula");
     } else {
       setTheme("light");
@@ -20,7 +22,11 @@ const Navbar = () => {
     // add custom data-theme attribute
     document.querySelector("html").setAttribute("data-theme", localTheme);
   }, [theme]);
-
+  if(loading){
+    return <div className="flex justify-center items-center h-screen">
+      <HashLoader height={140} radius={9} width={40} color="#36d7b7" />
+    </div>
+  }
   const navLink = (
     <>
       <NavLink
@@ -78,6 +84,7 @@ const Navbar = () => {
       }
     </>
   );
+
   return (
     <div className="navbar   ">
       <div className="navbar-start ">
@@ -118,6 +125,7 @@ const Navbar = () => {
         <label className="cursor-pointer mr-6 mt-2 grid place-items-center">
           <input
             type="checkbox"
+            name="checked"
             onChange={handleToggle}
             className="toggle theme-controller bg-base-content row-start-1 col-start-1 col-span-2"
           />
@@ -182,7 +190,7 @@ const Navbar = () => {
             : "hover:text-[#0076EA]"
         }
       >
-        <li className="text-sm font-medium font-poppins">My Attempted Assignments</li>{" "}
+       <Link to='/my-submit'> <li className="text-sm font-medium font-poppins"> My Submitted</li>{" "}</Link>
       </NavLink>
                 <button onClick={userSignOut} className="bg-[#571f8e] px-4  rounded-md text-xl text-white  font-serif font-semibold">
                   Log Out

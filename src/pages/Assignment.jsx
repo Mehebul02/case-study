@@ -14,7 +14,7 @@ const [filter , setFilter]= useState('')
   }, [user]);
 
   const getData = async () => {
-    const { data } = await axios(`${import.meta.env.VITE_API_URL}/assignments?filter =${filter}`);
+    const { data } = await axios(`${import.meta.env.VITE_API_URL}/assignments`);
     // console.log(data);
     setAssignments(data)
   };

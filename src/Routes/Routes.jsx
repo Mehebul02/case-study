@@ -10,6 +10,8 @@ import Assignment from "../pages/Assignment";
 import UpdatePage from "../pages/UpdatePage";
 import ViewDetails from "../pages/ViewDetails";
 import AssignmentSubForm from "../pages/AssignmentSubForm";
+import MySubmit from "../pages/MySubmit";
+import GiveMark from "../pages/GiveMark";
 
 const router = createBrowserRouter([
   {
@@ -29,12 +31,13 @@ const router = createBrowserRouter([
         ),
       },
       {
-        path: "/pending",
+        path: "/pending/",
         element: (
           <PrivateRoutes>
             <PendingAssignments />
           </PrivateRoutes>
         ),
+        loader: () => fetch(`${import.meta.env.VITE_API_URL}/submits`),
       },
       {
         path: "/assignments",
@@ -62,6 +65,19 @@ const router = createBrowserRouter([
         element: <AssignmentSubForm />,
         loader: ({ params }) =>
           fetch(`${import.meta.env.VITE_API_URL}/assignments/${params.id}`),
+      },
+      {
+        path: "/my-submit",
+        element: (
+          <PrivateRoutes>
+            <MySubmit />
+          </PrivateRoutes>
+        ),
+      },
+      {
+        path:'/give-mark/:id',
+        element:<GiveMark/>,
+        loader: ({params}) => fetch(`${import.meta.env.VITE_API_URL}/submits/${params.id}`)
       },
 
       {
