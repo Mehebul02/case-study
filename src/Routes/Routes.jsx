@@ -12,11 +12,13 @@ import ViewDetails from "../pages/ViewDetails";
 import AssignmentSubForm from "../pages/AssignmentSubForm";
 import MySubmit from "../pages/MySubmit";
 import GiveMark from "../pages/GiveMark";
+import ErrorPage from "../pages/ErrorPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Roots />,
+    errorElement:<ErrorPage></ErrorPage>,
     children: [
       {
         index: true,
