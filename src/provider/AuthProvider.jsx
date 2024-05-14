@@ -1,4 +1,13 @@
-import { GithubAuthProvider, GoogleAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
+import {
+  GithubAuthProvider,
+  GoogleAuthProvider,
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  signOut,
+  updateProfile,
+} from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import auth from "../firebase/firebase_config";
 import axios from "axios";
@@ -10,10 +19,10 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
-// create user
-const createUser = (email, password) => {
+  // create user
+  const createUser = (email, password) => {
     setLoading(true);
-    return createUserWithEmailAndPassword( auth,email,password);
+    return createUserWithEmailAndPassword(auth, email, password);
   };
   // Sign in
   const userSignIn = (email, password) => {
@@ -21,10 +30,13 @@ const createUser = (email, password) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
   // sign out
-  const userSignOut =async () => {
-    setLoading(true)
-    const {data} = await axios(`${import.meta.env.VITE_API_URL}/logout`,{withCredentials:true})
-  console.log(data)
+  const userSignOut = async () => {
+    setLoading(true);
+
+    const { data } = await axios(`${import.meta.env.VITE_API_URL}/logout`, {
+      withCredentials: true,
+    });
+
     return signOut(auth);
   };
   // google login
@@ -44,15 +56,51 @@ const createUser = (email, password) => {
   };
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setLoading(false);
       setUser(currentUser);
-      console.log("Tui sob somoy thakbi");
+      console.log("Current user..", currentUser);
+      setLoading(false);
+      const { data } = axios.post(
+        `${import.meta.env.VITE_API_URL}/jwt`,
+        {
+          email: currentUser?.user?.email,
+        },
+        { withCredentials: true }
+      );
+      console.log(data);
     });
     return () => {
       unsubscribe();
     };
   }, []);
 
+  // useEffect(() => {
+  //   const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+  //     // const userEmail = currentUser?.email || user?.email;
+  //     // const loggedUser = { email: userEmail };
+  //     setLoading(false);
+  //     setUser(currentUser);
+  //     console.log("Tui sob somoy thakbi");
+
+  //     // if (createUser) {
+  //     //   axios
+  //     //     .post(`${import.meta.env.VITE_API_URL}/jwt`, loggedUser, {
+  //     //       withCredentials: true,
+  //     //     })
+  //     //     .then((data) => {
+  //     //       console.log("Token response", data.data);
+  //     //     });
+  //     // } else {
+  //     //   axios(`${import.meta.env.VITE_API_URL}/logout`, loggedUser,{
+  //     //     withCredentials: true,
+  //     //   }).then((data) => {
+  //     //     console.log(data.data);
+  //     //   });
+  //     // }
+  //   });
+  //   return () => {
+  //     unsubscribe();
+  //   };
+  // }, []);
 
   const authInfo = {
     user,
@@ -62,7 +110,7 @@ const createUser = (email, password) => {
     userSignOut,
     signInGoogle,
     githubLogin,
-    userUpdateProfile
+    userUpdateProfile,
   };
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>

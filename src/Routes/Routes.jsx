@@ -39,7 +39,7 @@ const router = createBrowserRouter([
             <PendingAssignments />
           </PrivateRoutes>
         ),
-        loader: () => fetch(`${import.meta.env.VITE_API_URL}/submits`),
+        loader: () => fetch(`${import.meta.env.VITE_API_URL}/submits`,{credentials:'include'}),
       },
       {
         path: "/assignments",
@@ -65,7 +65,7 @@ const router = createBrowserRouter([
         path: "/submit/:id",
         element: <AssignmentSubForm />,
         loader: ({ params }) =>
-          fetch(`${import.meta.env.VITE_API_URL}/assignments/${params.id}`),
+          fetch(`${import.meta.env.VITE_API_URL}/assignments/${params.id}`,{credentials:'include'}),
       },
       {
         path: "/my-submit",

@@ -51,25 +51,24 @@ const Login = () => {
       // google login
       const googleLogin = async() => {
         
-        try{
-          const result =signInGoogle()
+        signInGoogle()
           .then((result) => {
             navigate(from);
           })
           .catch((error) => {
             console.log(error);
           });
-          const {data} = await axios.post(`${import.meta.env.VITE_API_URL}/jwt`,{email: result?.user?.email
-          },{withCredentials:true})
+          // const {data} = await axios.post(`${import.meta.env.VITE_API_URL}/jwt`,{email: result?.user?.email
+          // },{withCredentials:true})
           // toast.success("Signin Successful");
       
       // navigate(from);
       
-        }
-        catch(err){
-          console.log(err);
-          toast.error(err.message);
-        }
+        // }
+        // catch(err){
+        //   console.log(err);
+        //   toast.error(err.message);
+        // }
        
       };
       const handleGithub = () => {

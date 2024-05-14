@@ -15,7 +15,7 @@ const UpdatePage = () => {
   const { user } = useAuth();
   const location = useLocation()
   const navigate= useNavigate()
-  const from = location.state || '/'
+  const from = location.state || '/assignments'
   const handleUpdate = async (e) => {
     e.preventDefault();
     const form = e.target;

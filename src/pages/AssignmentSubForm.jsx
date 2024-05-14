@@ -1,11 +1,12 @@
 import axios from "axios";
 import toast from "react-hot-toast";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import { Helmet } from "react-helmet-async";
 
 const AssignmentSubForm = () => {
   const assignment = useLoaderData();
+  const navigate= useNavigate()
   const {user} = useAuth()
   const { _id,  thumbnail, title, email,description, mark, difficulty } =
     assignment;
@@ -38,9 +39,11 @@ const  feedback=''
 
       const { data } = await axios.post(
         `${import.meta.env.VITE_API_URL}/submits`,
-        submitData,{withCredentials:true}
+        submitData
       );
       toast.success('Assignment submit successfully')
+      navigate('/assignments')
+      form.reset()
     } catch (err) {
       console.log(err);
     }
@@ -58,7 +61,7 @@ const  feedback=''
         <div className="text-center mt-14 space-y-4">
           <input
             type="text"
-            name="url"
+            name="url" required
             placeholder="Assignment Url"
             className="input input-bordered input-warning w-full max-w-2xl"
           />
@@ -66,7 +69,7 @@ const  feedback=''
           <textarea
             name="note"
             placeholder="Quick Note........"
-            rows="4"
+            rows="4" required
             className="textarea textarea-bordered  textarea-lg w-full max-w-2xl"
           ></textarea>
         </div>
