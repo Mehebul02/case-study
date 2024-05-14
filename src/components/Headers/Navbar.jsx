@@ -125,13 +125,15 @@ const Navbar = () => {
           <span className="text-[#0076EA]">Artistic</span>
           <span className="text-[#571f8e] ">Vistas</span>
         </a> */}
-        <img className="w-52" src={logo} alt="" />
+       <Link to='/'>
+       <img className="w-28 lg:w-52" src={logo} alt="" />
+       </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal gap-10 px-1">{navLink}</ul>
       </div>
       <div className="navbar-end">
-        <label className="cursor-pointer mr-6 mt-2 grid place-items-center">
+        <label className="cursor-pointer ml-10 mt-2 grid place-items-center">
           <input
             type="checkbox"
             name="checked"

@@ -1,5 +1,7 @@
 import { Helmet } from "react-helmet-async";
 import Hero from "../Headers/Hero";
+import Faq from "../Faq";
+import Feature from "../Feature";
 
 const Home = () => {
     return (
@@ -8,6 +10,8 @@ const Home = () => {
       <title>Case Study</title>
     </Helmet>
             <Hero/>
+            <Feature/>
+            <Faq/>
         </div>
     );
 };
