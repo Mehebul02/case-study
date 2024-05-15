@@ -30,7 +30,7 @@ const CreateAssignments = () => {
       name,
       email,
     };
-    console.log(assignmentData);
+    // console.log(assignmentData);
 
     try {
       const { data } = await axios.post(

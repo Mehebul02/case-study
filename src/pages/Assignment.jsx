@@ -20,7 +20,7 @@ const [filter, setFilter] = useState('');
     // console.log(data);
     setAssignments(data)
   };
-  console.log(assignments)
+  // console.log(assignments)
 
   useEffect(() => {
     if (filter !== '') {

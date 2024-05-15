@@ -47,7 +47,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/update/:id",
-        element: <UpdatePage />,
+        element: <PrivateRoutes><UpdatePage /></PrivateRoutes>,
         loader: ({ params }) =>
           fetch(`${import.meta.env.VITE_API_URL}/assignments/${params.id}`),
       },
@@ -63,7 +63,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/submit/:id",
-        element: <AssignmentSubForm />,
+        element: <PrivateRoutes><AssignmentSubForm /></PrivateRoutes>,
         loader: ({ params }) =>
           fetch(`${import.meta.env.VITE_API_URL}/assignments/${params.id}`,{credentials:'include'}),
       },
@@ -77,7 +77,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/give-mark/:id",
-        element: <GiveMark />,
+        element: <PrivateRoutes><GiveMark /></PrivateRoutes>,
         loader: ({ params }) =>
           fetch(`${import.meta.env.VITE_API_URL}/submits/${params.id}`,{credentials:"include"}),
       },

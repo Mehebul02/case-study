@@ -14,7 +14,7 @@ const MySubmit = () => {
 
   const getData = async () => {
     const { data } = await axios(
-      `${import.meta.env.VITE_API_URL}/my-submit/${user?.email}`,{withCredentials:true}
+      `${import.meta.env.VITE_API_URL}/my-submit/${user?.email}`
     );
     setSubmits(data);
   };
