@@ -46,11 +46,11 @@ const CreateAssignments = () => {
     }
   };
   return (
-    <div className="max-w-[850px] mx-auto ">
+    <div className="max-w-[850px] mx-auto mt-10">
       <Helmet>
-      <title> Create Assignment-Case Study </title>
+      <title > Create Assignment-Case Study </title>
     </Helmet>
-      <h2 className="text-2xl font-bold font-poppins mb-4">
+      <h2 className="text-2xl font-bold text-center font-poppins mb-4">
         Create Assignment
       </h2>
       {/* {successMessage && <p className="text-green-500">{successMessage}</p>} */}

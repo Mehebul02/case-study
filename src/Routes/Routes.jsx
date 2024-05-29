@@ -13,6 +13,9 @@ import AssignmentSubForm from "../pages/AssignmentSubForm";
 import MySubmit from "../pages/MySubmit";
 import GiveMark from "../pages/GiveMark";
 import ErrorPage from "../pages/ErrorPage";
+import Dashboard from "../layout/Dashboard/Dashboard";
+import Statistics from "../pages/Dashboard/Common/Statistics";
+import StudentHome from "../pages/Dashboard/StudentHome";
 
 const router = createBrowserRouter([
   {
@@ -24,14 +27,14 @@ const router = createBrowserRouter([
         index: true,
         element: <Home />,
       },
-      {
-        path: "/create",
-        element: (
-          <PrivateRoutes>
-            <CreateAssignments />
-          </PrivateRoutes>
-        ),
-      },
+      // {
+      //   path: "/create",
+      //   element: (
+      //     <PrivateRoutes>
+      //       <CreateAssignments />
+      //     </PrivateRoutes>
+      //   ),
+      // },
       {
         path: "/pending/",
         element: (
@@ -67,14 +70,14 @@ const router = createBrowserRouter([
         loader: ({ params }) =>
           fetch(`${import.meta.env.VITE_API_URL}/assignments/${params.id}`,{credentials:'include'}),
       },
-      {
-        path: "/my-submit",
-        element: (
-          <PrivateRoutes>
-            <MySubmit />
-          </PrivateRoutes>
-        ),
-      },
+      // {
+      //   path: "/my-submit",
+      //   element: (
+      //     <PrivateRoutes>
+      //       <MySubmit />
+      //     </PrivateRoutes>
+      //   ),
+      // },
       {
         path: "/give-mark/:id",
         element: <PrivateRoutes><GiveMark /></PrivateRoutes>,
@@ -90,6 +93,37 @@ const router = createBrowserRouter([
         path: "/register",
         element: <Register />,
       },
+     
+    ],
+  
+  },
+  {
+    path:'/dashboard',
+    element:<Dashboard/>,
+    children:[
+      {
+        path:'studentHome',
+        element:<StudentHome/>
+      },
+      {
+        path: "my-submit",
+        element: (
+          <PrivateRoutes>
+            <MySubmit />
+          </PrivateRoutes>
+        ),
+      },
+    
+      {
+        path: "createAssignments",
+        element: (
+          <PrivateRoutes>
+            <CreateAssignments />
+          </PrivateRoutes>
+        ),
+      
+    },
+   
     ],
   },
 ]);

@@ -58,23 +58,7 @@ const Navbar = () => {
       >
         <li className="text-xl font-medium font-serif">Assignments</li>{" "}
       </NavLink>
-      {user && (
-        <NavLink
-          to="/create"
-          className={({ isActive, isPending }) =>
-            isPending
-              ? "pending"
-              : isActive
-              ? "text-[#0076EA] border-b-4 border-[#571f8e]"
-              : "hover:text-[#0076EA]"
-          }
-        >
-          <li className="text-xl font-medium font-serif">
-            {" "}
-            Create Assignments{" "}
-          </li>{" "}
-        </NavLink>
-      )}
+     
       {user && (
         <NavLink
           to="/pending"
@@ -132,8 +116,8 @@ const Navbar = () => {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal gap-10 px-1">{navLink}</ul>
       </div>
-      <div className="navbar-end">
-        <label className="cursor-pointer ml-10 mt-2 grid place-items-center">
+      <div className="navbar-end space-x-7">
+      <label className="cursor-pointer ml-10 mt-2 grid place-items-center">
           <input
             type="checkbox"
             name="checked"
@@ -170,6 +154,12 @@ const Navbar = () => {
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
           </svg>
         </label>
+    {
+      user ? <div>
+     <Link to='/dashboard/studentHome'> <button className="bg-[#5554E2] text-white font-semibold px-2 py-2 rounded-md">Dashboard</button></Link>
+     </div>:''
+    }
+       
         {user ? (
           <>
             <div className="dropdown dropdown-end z-[2] ">
@@ -187,27 +177,8 @@ const Navbar = () => {
                 className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content  rounded-box w-52"
               >
                 <div className="space-y-3">
-                  {/* <h1 className="text-2xl font-serif font-medium">
-                  {user?.displayName}
-                </h1> */}
-                  <NavLink
-                    to="/allArt"
-                    className={({ isActive, isPending }) =>
-                      isPending
-                        ? "pending"
-                        : isActive
-                        ? "text-[#0076EA] border-b-4 border-[#571f8e]"
-                        : "hover:text-[#0076EA]"
-                    }
-                  >
-                    <Link to="/my-submit">
-                      {" "}
-                      <li className="text-sm font-medium font-poppins">
-                        {" "}
-                        My Submitted
-                      </li>{" "}
-                    </Link>
-                  </NavLink>
+                 
+                 
                   <button
                     onClick={userSignOut}
                     className="bg-[#571f8e] px-4  rounded-md text-xl text-white  font-serif font-semibold"

@@ -4,20 +4,23 @@ import useAuth from "../hooks/useAuth";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { Helmet } from "react-helmet-async";
+import useSubmit from "../hooks/useSubmit";
 
 const MySubmit = () => {
   const { user } = useAuth();
-  const [submits, setSubmits] = useState([]);
-  useEffect(() => {
-    getData();
-  }, [user]);
+  const [mySubmits]=useSubmit()
 
-  const getData = async () => {
-    const { data } = await axios(
-      `${import.meta.env.VITE_API_URL}/my-submit/${user?.email}`
-    );
-    setSubmits(data);
-  };
+  // const [submits, setSubmits] = useState([]);
+  // useEffect(() => {
+  //   getData();
+  // }, [user]);
+
+  // const getData = async () => {
+  //   const { data } = await axios(
+  //     `${import.meta.env.VITE_API_URL}/my-submit/${user?.email}`
+  //   );
+  //   setSubmits(data);
+  // };
 
   return (
     <div className="max-w-[1320px] mx-auto">
@@ -31,7 +34,7 @@ const MySubmit = () => {
           </h2>
 
           <span className="px-3 py-1 bg-[#544CE0] font-poppins font-medium  text-xs  text-white rounded-full ">
-            {submits.length}
+            {mySubmits.length}
           </span>
         </div>
 
@@ -79,7 +82,7 @@ const MySubmit = () => {
                     </tr>
                   </thead>
                   <tbody className="bg-white divide-y divide-gray-200 ">
-                    {submits.map((submit, idx) => (
+                    {mySubmits.map((submit, idx) => (
                       <tr key={idx}>
                         <td className="px-4 py-4 text-sm text-gray-500  whitespace-nowrap">
                           {idx + 1}
