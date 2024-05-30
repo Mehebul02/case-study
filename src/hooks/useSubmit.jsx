@@ -3,9 +3,9 @@ import useAuth from "./useAuth";
 import useAxiosCommon from "./useAxiosCommon";
 
 const useSubmit = () => {
-  const { user ,loading} = useAuth();
+  const { user ,loading,} = useAuth();
 const axiosCommon = useAxiosCommon()
-  const { data:mySubmits=[] } = useQuery({
+  const { data:mySubmits=[],isLoading ,refetch} = useQuery({
     queryKey: ["mySubmit",user?.email],
     enabled:!loading && !!user?.email,
     queryFn:async()=>{
@@ -14,7 +14,7 @@ const axiosCommon = useAxiosCommon()
     }
     
   });
-  return [mySubmits]
+  return [mySubmits,isLoading,refetch]
 };
 
 export default useSubmit;

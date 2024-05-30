@@ -14,8 +14,9 @@ import MySubmit from "../pages/MySubmit";
 import GiveMark from "../pages/GiveMark";
 import ErrorPage from "../pages/ErrorPage";
 import Dashboard from "../layout/Dashboard/Dashboard";
-import Statistics from "../pages/Dashboard/Common/Statistics";
 import StudentHome from "../pages/Dashboard/StudentHome";
+import Collaboration from "../pages/Collaboration/Collaboration";
+import Blog from "../pages/Blog/Blog";
 
 const router = createBrowserRouter([
   {
@@ -48,12 +49,12 @@ const router = createBrowserRouter([
         path: "/assignments",
         element: <Assignment />,
       },
-      {
-        path: "/update/:id",
-        element: <PrivateRoutes><UpdatePage /></PrivateRoutes>,
-        loader: ({ params }) =>
-          fetch(`${import.meta.env.VITE_API_URL}/assignments/${params.id}`),
-      },
+      // {
+      //   path: "/update/:id",
+      //   element: <PrivateRoutes><UpdatePage /></PrivateRoutes>,
+      //   loader: ({ params }) =>
+      //     fetch(`${import.meta.env.VITE_API_URL}/assignments/${params.id}`),
+      // },
       {
         path: "/details/:id",
         element: (
@@ -84,6 +85,15 @@ const router = createBrowserRouter([
         loader: ({ params }) =>
           fetch(`${import.meta.env.VITE_API_URL}/submits/${params.id}`,{credentials:"include"}),
       },
+      {
+        path:'/collaboration',
+        element:<Collaboration/>
+
+      },
+      {
+        path:'/blog',
+        element:<Blog/>
+      },
 
       {
         path: "/login",
@@ -104,6 +114,12 @@ const router = createBrowserRouter([
       {
         path:'studentHome',
         element:<StudentHome/>
+      },
+      {
+        path: "update/:id",
+        element: <PrivateRoutes><UpdatePage /></PrivateRoutes>,
+        loader: ({ params }) =>
+          fetch(`${import.meta.env.VITE_API_URL}/assignments/${params.id}`),
       },
       {
         path: "my-submit",

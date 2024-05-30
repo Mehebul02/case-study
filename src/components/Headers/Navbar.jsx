@@ -75,6 +75,30 @@ const Navbar = () => {
           </li>{" "}
         </NavLink>
       )}
+      <NavLink
+        to="/collaboration"
+        className={({ isActive, isPending }) =>
+          isPending
+            ? "pending"
+            : isActive
+            ? "text-[#0076EA] border-b-4 border-[#571f8e]"
+            : "hover:text-[#0076EA]"
+        }
+      >
+        <li className="text-xl font-medium font-serif">Collaboration</li>{" "}
+      </NavLink>
+      <NavLink
+        to="/blog"
+        className={({ isActive, isPending }) =>
+          isPending
+            ? "pending"
+            : isActive
+            ? "text-[#0076EA] border-b-4 border-[#571f8e]"
+            : "hover:text-[#0076EA]"
+        }
+      >
+        <li className="text-xl font-medium font-serif">Blog</li>{" "}
+      </NavLink>
     </>
   );
 

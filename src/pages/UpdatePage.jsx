@@ -8,13 +8,14 @@ import { useLoaderData, useLocation, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 const UpdatePage = () => {
   const assignment = useLoaderData();
-  // console.log(assignment)
+  console.log(assignment)
   const { _id, thumbnail, title, mark, difficulty, description } = assignment;
-
   const [startDate, setStartDate] = useState(new Date());
   const { user } = useAuth();
   const location = useLocation()
   const navigate= useNavigate()
+  const [imagePreview ,setImagePreview] =useState()
+  const [imageText ,setImageText] =useState('Upload image')
   const from = location.state || '/assignments'
   const handleUpdate = async (e) => {
     e.preventDefault();
@@ -52,6 +53,10 @@ const UpdatePage = () => {
       console.log(err);
     }
   };
+  const handleImage =image =>{
+    setImagePreview(URL.createObjectURL(image))
+    setImageText(image.name)
+  }
   return (
     <div className="max-w-[850px] mx-auto ">
       <Helmet>
@@ -97,8 +102,8 @@ const UpdatePage = () => {
           />
         </div>
 
-        <div className="grid grid-cols-6 gap-7">
-          <div className="col-span-3">
+        <div className="grid grid-cols-3 gap-7">
+          <div className="">
             <label className="block mb-1 text-xl font-serif font-semibold">
               Difficulty Level:
             </label>
@@ -114,7 +119,7 @@ const UpdatePage = () => {
             </select>
           </div>
 
-          <div className="col-span-3">
+          <div className="">
             <label className="block mb-1 text-xl font-serif font-semibold">
               Due Date:
             </label>
@@ -125,6 +130,31 @@ const UpdatePage = () => {
               onChange={(date) => setStartDate(date)}
             />
           </div>
+           {/* image Upload  */}
+           <div className=' p-4 bg-white w-full  m-auto rounded-lg flex justify-around items-center'>
+              <div className='file_upload px-5 py-3 relative border-4 border-dotted border-gray-300 rounded-lg'>
+                <div className='flex flex-col w-max mx-auto text-center'>
+                  <label>
+                    <input
+                      className='text-sm cursor-pointer w-36 hidden'
+                      type='file'
+                      name='image'
+                      onChange={(e)=>handleImage(e.target.files[0])}
+                      id='image'
+                      accept='image/*'
+                      hidden
+                    />
+                    <div className='bg-[#5447E0] text-white border border-gray-300 rounded font-semibold cursor-pointer p-1 px-3
+  '>
+                     {imageText.length >20 ? imageText.split('.')[0].slice(0.15) +'...' + imageText.split('.')[1]:imageText}
+                    </div>
+                  </label>
+                </div>
+              </div>
+              <div className='h-20 w-20 object-cover overflow-hidden flex items-center '>
+              {imagePreview && <img className='rounded-lg border-2 border-[#f43f5e]' src={imagePreview}></img>}
+              </div>
+            </div>
         </div>
         <div>
           <label className="block mb-1 text-xl font-serif font-semibold">

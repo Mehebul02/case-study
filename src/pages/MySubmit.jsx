@@ -5,28 +5,51 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { Helmet } from "react-helmet-async";
 import useSubmit from "../hooks/useSubmit";
+import { HashLoader } from "react-spinners";
+import useAxiosCommon from "../hooks/useAxiosCommon";
+import toast from "react-hot-toast";
 
 const MySubmit = () => {
-  const { user } = useAuth();
-  const [mySubmits]=useSubmit()
+  const { user, loading } = useAuth();
+  const [mySubmits, isLoading,refetch] = useSubmit();
+  const axiosCommon =useAxiosCommon()
+  if (isLoading || loading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <HashLoader height={140} radius={9} width={40} color="#36d7b7" />
+      </div>
+    );
+  }
+//   const [submits, setSubmits] = useState([]);
+//   useEffect(() => {
+//     getData();
+//   }, [user]);
 
-  // const [submits, setSubmits] = useState([]);
-  // useEffect(() => {
-  //   getData();
-  // }, [user]);
-
-  // const getData = async () => {
-  //   const { data } = await axios(
-  //     `${import.meta.env.VITE_API_URL}/my-submit/${user?.email}`
-  //   );
-  //   setSubmits(data);
-  // };
-
+//   const getData = async () => {
+//     const { data } = await axios(
+//       `${import.meta.env.VITE_API_URL}/my-submit/${user?.email}`
+//     );
+//     setSubmits(data);
+//   };
+// console.log(submits);
+const handleDelete=async(id)=>{
+ 
+  refetch()
+  try{
+    const {data} =axiosCommon.delete(`/assignments/${id}`)
+    toast.success('Delete Assignment')
+    console.log(data);
+  
+  }
+  catch(err){
+    console.log(err);
+  }
+}
   return (
     <div className="max-w-[1320px] mx-auto">
       <Helmet>
-      <title> My Submitted- Case Study </title>
-    </Helmet>
+        <title> My Submitted- Case Study </title>
+      </Helmet>
       <section className="container px-4 mx-auto pt-12">
         <div className="flex items-center gap-x-3">
           <h2 className="text-lg font-medium text-gray-800 ">
@@ -79,6 +102,12 @@ const MySubmit = () => {
                       <th className="px-4 py-3.5  text-left rtl:text-right text-white font-poppins font-bold text-sm">
                         Feedback
                       </th>
+                      <th className="px-4 py-3.5  text-left rtl:text-right text-white font-poppins font-bold text-sm">
+                      Details
+                      </th>
+                      <th className="px-4 py-3.5  text-left rtl:text-right text-white font-poppins font-bold text-sm">
+                        Delete
+                      </th>
                     </tr>
                   </thead>
                   <tbody className="bg-white divide-y divide-gray-200 ">
@@ -123,7 +152,15 @@ const MySubmit = () => {
                           {submit.mark}
                         </td>
                         <td className="px-4 py-4 text-sm whitespace-nowrap">
-                          {submit.feedback.slice(0,60)}
+                          {submit.feedback?.slice(0, 60)}
+                        </td>
+                        <td className="px-4 py-4 text-sm whitespace-nowrap">
+                      <Link to={`/dashboard/update/${submit._id}`}>
+                      <button className="btn-link">Update</button>
+                      </Link>
+                        </td>
+                        <td className="px-4 py-4 text-sm whitespace-nowrap">
+                       <button onClick={()=>handleDelete(submit._id)} className="btn-link text-red-600 font-semibold">Delete</button>
                         </td>
                       </tr>
                     ))}
