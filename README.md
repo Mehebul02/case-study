@@ -1,14 +1,10 @@
-<!-- # React + Vite
+# Case Study
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[Live-Site](https://case-study-b14df.web.app/)
 
-Currently, two official plugins are available:
+[Client-Repository](https://github.com/Mehebul02/case-study-client)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh -->
-# WebSite Name:
-https://solosphere.web.app
-* Case Study
+[Server-Repository](https://github.com/Mehebul02/case-study-server)
  # Packages Name
  * Lottie React
  * React-simple-typewriter
